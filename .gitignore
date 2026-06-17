@@ -15,3 +15,6 @@ Thumbs.db
 
 # Build
 release/
+
+# Claude
+.claude/
