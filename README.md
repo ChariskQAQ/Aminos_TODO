@@ -62,14 +62,6 @@
 | Markdown | marked + DOMPurify（按需加载） |
 | 存储 | JSON (`%APPDATA%/Aminos_TODO/aminos-todo.json`) |
 
-## 开发
-
-```bash
-npm install
-npm run tauri dev     # 开发模式
-npm run tauri build   # 生产构建
-```
-
 ## 项目结构
 
 ```
