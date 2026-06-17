@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npx electron *)",
+      "Bash(node -e \"require\\('child_process'\\).execSync\\('node node_modules/electron/install.js', {stdio:'inherit', env:{...process.env, ELECTRON_MIRROR:'https://npmmirror.com/mirrors/electron/'}}\\)\")",
+      "Bash(rm -rf node_modules/electron)",
+      "Bash(ELECTRON_MIRROR=\"https://npmmirror.com/mirrors/electron/\" npm install electron@33.2.1)",
+      "Bash(powershell -Command 'Get-Process cmd | Where-Object { $_.MainWindowTitle -like '\\\\''*todo*'\\\\'' } | Stop-Process -Force')",
+      "Bash(./node_modules/.bin/vite)",
+      "WebFetch(domain:localhost)",
+      "Bash(powershell -NoProfile -Command \"Get-Process electron -ErrorAction SilentlyContinue | Stop-Process -Force\")",
+      "Bash(./node_modules/.bin/vite build *)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(rustc --version)",
+      "Bash(cargo --version)",
+      "Bash(where rustc *)",
+      "Read(//c/Users/14637/.cargo/**)",
+      "Bash(npx vite *)",
+      "Bash(winget install *)",
+      "Bash(powershell *)",
+      "Bash(curl --version)",
+      "Bash(npm --version)",
+      "Bash(rustup show *)",
+      "Bash(rustup toolchain *)",
+      "Bash(python gen_icons.py)",
+      "Bash(taskkill //IM aminos-todo.exe //F)",
+      "Bash(start *)",
+      "Bash(cargo check *)",
+      "Bash(cargo clean *)"
+    ]
+  }
+}

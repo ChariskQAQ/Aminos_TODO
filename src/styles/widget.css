@@ -1,0 +1,382 @@
+:root,
+[data-theme='dark'] {
+  --w-bg: rgba(18, 24, 34, 0.93);
+  --w-border: rgba(255, 255, 255, 0.10);
+  --w-text: rgba(235, 240, 248, 0.97);
+  --w-text-dim: rgba(180, 190, 205, 0.70);
+  --w-text-empty: rgba(180, 190, 205, 0.45);
+  --w-handle: rgba(255, 255, 255, 0.05);
+
+  --w-tile-bg: rgba(255, 255, 255, 0.04);
+  --w-tile-hover: rgba(255, 255, 255, 0.08);
+  --w-tile-border: rgba(255, 255, 255, 0.06);
+
+  --w-p1-bg: rgba(224, 164, 80, 0.08);
+  --w-p1-border: rgba(224, 164, 80, 0.15);
+  --w-p1-hover: rgba(224, 164, 80, 0.14);
+  --w-p2-bg: rgba(224, 85, 106, 0.08);
+  --w-p2-border: rgba(224, 85, 106, 0.15);
+  --w-p2-hover: rgba(224, 85, 106, 0.14);
+
+  --w-du-overdue: rgba(224, 85, 106, 0.85);
+  --w-du-overdue-bg: rgba(224, 85, 106, 0.18);
+  --w-du-today: rgba(224, 164, 80, 0.85);
+  --w-du-today-bg: rgba(224, 164, 80, 0.16);
+  --w-du-soon: rgba(224, 164, 80, 0.60);
+
+  --w-countdown: rgba(130, 180, 240, 0.85);
+  --w-scrollbar: rgba(255, 255, 255, 0.12);
+  --w-scrollbar-hover: rgba(255, 255, 255, 0.22);
+}
+
+[data-theme='light'] {
+  --w-bg: rgba(255, 255, 255, 0.90);
+  --w-border: rgba(0, 0, 0, 0.10);
+  --w-text: rgba(0, 0, 0, 0.88);
+  --w-text-dim: rgba(0, 0, 0, 0.50);
+  --w-text-empty: rgba(0, 0, 0, 0.35);
+  --w-handle: rgba(0, 0, 0, 0.06);
+
+  --w-tile-bg: rgba(0, 0, 0, 0.03);
+  --w-tile-hover: rgba(0, 0, 0, 0.06);
+  --w-tile-border: rgba(0, 0, 0, 0.06);
+
+  --w-p1-bg: rgba(230, 81, 0, 0.06);
+  --w-p1-border: rgba(230, 81, 0, 0.12);
+  --w-p1-hover: rgba(230, 81, 0, 0.12);
+  --w-p2-bg: rgba(198, 40, 40, 0.06);
+  --w-p2-border: rgba(198, 40, 40, 0.14);
+  --w-p2-hover: rgba(198, 40, 40, 0.12);
+
+  --w-du-overdue: rgba(198, 40, 40, 0.88);
+  --w-du-overdue-bg: rgba(198, 40, 40, 0.12);
+  --w-du-today: rgba(230, 81, 0, 0.88);
+  --w-du-today-bg: rgba(230, 81, 0, 0.10);
+  --w-du-soon: rgba(230, 81, 0, 0.50);
+
+  --w-countdown: rgba(0, 102, 204, 0.80);
+  --w-scrollbar: rgba(0, 0, 0, 0.14);
+  --w-scrollbar-hover: rgba(0, 0, 0, 0.24);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  background: transparent;
+  user-select: none;
+}
+
+input, select, button, textarea {
+  font-family: inherit;
+}
+
+.widget {
+  margin: 4px;
+  padding: 10px;
+  background: var(--w-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 8px;
+  border: 1px solid var(--w-border);
+  min-height: 60px;
+  position: relative;
+}
+
+.widget-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--w-text-dim);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  padding: 2px 4px 8px;
+  border-bottom: 1px solid var(--w-border);
+}
+
+/* Resize edges */
+.resize-nw { -webkit-app-region: nw-resize; }
+.resize-ne { -webkit-app-region: ne-resize; }
+.resize-sw { -webkit-app-region: sw-resize; }
+.resize-se { -webkit-app-region: se-resize; }
+.resize-n  { -webkit-app-region: n-resize;  }
+.resize-s  { -webkit-app-region: s-resize;  }
+.resize-e  { -webkit-app-region: e-resize;  }
+.resize-w  { -webkit-app-region: w-resize;  }
+
+.resize-edge {
+  position: absolute;
+  z-index: 10;
+}
+.resize-n { top: 0; left: 12px; right: 12px; height: 6px; }
+.resize-s { bottom: 0; left: 12px; right: 12px; height: 6px; }
+.resize-e { right: 0; top: 12px; bottom: 12px; width: 6px; }
+.resize-w { left: 0; top: 12px; bottom: 12px; width: 6px; }
+.resize-nw { top: 0; left: 0; width: 14px; height: 14px; }
+.resize-ne { top: 0; right: 0; width: 14px; height: 14px; }
+.resize-sw { bottom: 0; left: 0; width: 14px; height: 14px; }
+.resize-se { bottom: 0; right: 0; width: 14px; height: 14px; }
+
+.widget-drag-area {
+  position: absolute;
+  top: 0;
+  left: 14px;
+  right: 14px;
+  height: 22px;
+  -webkit-app-region: drag;
+  z-index: 5;
+}
+
+.widget-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--w-text-empty);
+  font-size: 14px;
+}
+
+.widget-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  color: var(--w-text-empty);
+  font-size: 13px;
+}
+
+/* Tile Grid */
+.tile-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  -webkit-app-region: no-drag;
+}
+
+/* Todo Tile */
+.todo-tile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+  border: 1px solid var(--w-tile-border);
+  border-left: 3px solid var(--w-tile-border);
+  background: var(--w-tile-bg);
+}
+
+.todo-tile:hover {
+  background: var(--w-tile-hover);
+  border-left-width: 3px;
+}
+
+.todo-tile:active {
+  transform: scale(0.985);
+}
+
+/* Priority tint overlays */
+.todo-tile.priority-1 {
+  background: var(--w-p1-bg);
+  border-color: var(--w-p1-border);
+}
+.todo-tile.priority-1:hover {
+  background: var(--w-p1-hover);
+}
+
+.todo-tile.priority-2 {
+  background: var(--w-p2-bg);
+  border-color: var(--w-p2-border);
+}
+.todo-tile.priority-2:hover {
+  background: var(--w-p2-hover);
+}
+
+/* Keep accent border visible even with priority tint */
+.todo-tile.priority-1,
+.todo-tile.priority-2 {
+  border-left-width: 3px;
+}
+
+.tile-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tile-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--w-text);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tile-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tile-category {
+  font-size: 10px;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.tile-sub-progress {
+  font-size: 10px;
+  font-weight: 600;
+  background: rgba(78, 201, 176, 0.15);
+  color: #4ec9b0;
+  padding: 1px 6px;
+  border-radius: 8px;
+}
+
+.tile-priority-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.tile-priority-dot.p1 {
+  background: #e0a450;
+  box-shadow: 0 0 4px rgba(224, 164, 80, 0.5);
+}
+.tile-priority-dot.p2 {
+  background: #e0556a;
+  box-shadow: 0 0 4px rgba(224, 85, 106, 0.5);
+}
+
+.tile-countdown {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--w-countdown);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.3px;
+}
+
+.tile-countdown.done {
+  animation: tilePulse 1s ease-in-out infinite;
+}
+
+@keyframes tilePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Due date */
+.tile-due {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--w-text-dim);
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tile-due.overdue {
+  color: var(--w-du-overdue);
+  background: var(--w-du-overdue-bg);
+  font-weight: 600;
+}
+
+.tile-due.today {
+  color: var(--w-du-today);
+  background: var(--w-du-today-bg);
+  font-weight: 600;
+}
+
+.tile-due.soon {
+  color: var(--w-du-soon);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--w-scrollbar);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--w-scrollbar-hover);
+}
+
+/* ── Pomodoro tile ───────────────────────────────────────── */
+
+.pw-tile {
+  background: var(--w-tile-bg);
+  border: 1px solid var(--w-tile-border);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.pw-tile-ring {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.pw-tile-ring svg {
+  width: 100%;
+  height: 100%;
+}
+
+.pw-tile-ring .pw-work {
+  stroke: #e0556a;
+  transition: stroke-dashoffset .25s linear;
+}
+
+.pw-tile-ring .pw-break {
+  stroke: #4ec9b0;
+  transition: stroke-dashoffset .25s linear;
+}
+
+.pw-tile-time {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--w-text);
+  font-size: 18px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.pw-tile-label {
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 1px;
+}
+
+.pw-tile-title {
+  font-size: 11px;
+  color: var(--w-text-dim);
+  max-width: 120px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
